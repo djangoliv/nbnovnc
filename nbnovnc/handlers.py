@@ -36,9 +36,9 @@ class NBNoVNC(Configurable):
     depth = Integer(24, help="Desktop display depth.", config=True)
     novnc_directory = Unicode(u"/usr/share/novnc/", config=True,
         help="Path to noVNC web assets.")
-    vnc_command = Unicode(u"xinit -- /usr/bin/Xtigervnc :99 -geometry {geometry} -depth {depth}  -SecurityTypes None", config=True,
+    vnc_command = Unicode(u"xinit -- /usr/bin/vncserver :99 -SecurityTypes None -fg", config=True,
         help="Command to start VNC server. Contains string replacement fields.")
-    websockify_command = Unicode(u"websockify --web {novnc_directory} --heartbeat {heartbeat} {port} localhost:5999", config=True,
+    websockify_command = Unicode(u"websockify --web {novnc_directory} --heartbeat {heartbeat} {port} 0.0.0.0:5999", config=True,
         help="websockify command. Contains string replacement fields.")
 
 class NoVNCHandler(SupervisorHandler):
